@@ -39,13 +39,14 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        //skapar retrofit objekt för att kunna hantera api
         apipicture = findViewById(R.id.apipicture);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.thecatapi.com/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(ApiService.class);
+        //visa bild på katt direkt när programmet körs
         getCatImage();
     }
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pressButton(View v){
-        // Samma knappmetod som tidigare, anropar bara getCatImage()
+        // Samma metod som tidigare, anropar bara getCatImage()
         getCatImage();
     }
 
