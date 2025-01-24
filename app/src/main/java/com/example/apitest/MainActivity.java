@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: Started");
 
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -56,11 +56,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<CatImage>> call, Response<List<CatImage>> response) {
                 List<CatImage> catImages = response.body();
-                for (CatImage cat : catImages) {
-                    Log.d(TAG, "Cat URL: " + cat.getUrl());
-                    Picasso.get()
-                            .load(cat.getUrl())
-                            .into(apipicture);
+                if (catImages != null) {
+                    for (CatImage cat : catImages) {
+                        Log.d(TAG, "Cat URL: " + cat.getUrl());
+                        Picasso.get()
+                                .load(cat.getUrl())
+                                .into(apipicture);
+                    }
+                } else {
+                    Log.e(TAG, "Hittade inte data i api");
                 }
             }
 
