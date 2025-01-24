@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ApiTest</string>
+    <string name="button_name">I want more cats!</string>
+</resources>
